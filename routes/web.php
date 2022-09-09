@@ -32,4 +32,8 @@ Route::get('/yorikboss', function () {
     return Inertia::render('YorikBoss');
 });
 
+Route::get('/addition', function () {
+    return Inertia::render('Addition');
+});
+
 require __DIR__.'/auth.php';
