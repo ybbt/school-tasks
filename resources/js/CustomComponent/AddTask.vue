@@ -1,8 +1,15 @@
 <template>
-  <div class="bg-orange-400 p-3 my-3" :class="{' bg-emerald-400':result}">
-    <span class="px-2">{{ a }}</span>
-    <span class="px-2">+</span>
-    <span class="px-2">{{ b }}</span>
+  <div
+      class="p-3 my-3"
+      :class="{
+        'bg-blue-300':state.res===null,
+        'bg-orange-600':!result && state.res!==null,
+        'bg-emerald-400':result
+      }"
+  >
+    <span class="px-2">{{ task.a }}</span>
+    <span class="px-2">{{ task.operation }}</span>
+    <span class="px-2">{{ task.b }}</span>
     <span class="px-2">=</span>
     <TextInput
         v-model="state.res"
@@ -16,16 +23,21 @@
 
 import TextInput from '../Components/TextInput.vue';
 import {computed, reactive, watch} from "vue";
+import {arithmeticOperations} from "@/enums";
 
 const props = defineProps({
-  a: Number,
-  b: Number,
+  task: Object,
 });
 
 const state = reactive({res: null});
 
 const result = computed(() => {
-  return +state.res === props.a + props.b;
+  switch (props.task.operation) {
+    case arithmeticOperations.PLUS:
+      return +state.res === props.task.a + props.task.b;
+    case arithmeticOperations.MINUS:
+      return +state.res === props.task.a - props.task.b;
+  }
 })
 
 watch(props, async () => {
