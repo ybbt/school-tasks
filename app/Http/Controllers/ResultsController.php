@@ -10,6 +10,13 @@ use Inertia\Inertia;
 
 class ResultsController extends Controller
 {
+
+    public function save(SaveResultRequest $request){
+        $createdResult = auth()->user()->result()->create($request->validated());
+
+        return redirect('/multiplication');
+    }
+
     public function store(){
         $userResults = ResultResource::collection(auth()->user()->result()->orderBy('created_at', 'DESC')->whereRaw('created_at >= curdate()')/* ->where('created_at', '>', now()->subHours(24)) *//* ->take(10) */->get());
 
