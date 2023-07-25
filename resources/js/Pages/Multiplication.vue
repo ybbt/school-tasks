@@ -1,26 +1,3 @@
-<!-- <template>
-  <h1 class="text-green-900 text-4xl text-center">Приклади</h1>
-  <div class="flex justify-center ">
-    <div class="min-w-max pt-5">
-      <AddTask @changeTrue="taskChangeTrue(index)" @changeFalse="taskChangeFalse(index)" v-for="(item, index) in state.tasksArr" :task="item" class="text-2xl rounded-lg"></AddTask>
-      <PrimaryButton 
-        @click="newTasks" 
-        class="text-xl bg-blue-900"
-        :class="{
-          'hidden':state.isAllRightAnswer===false,
-        }"
-      >
-        Нові приклади
-    </PrimaryButton>
-    </div>
-  </div>
-
-  <h1 class="text-4xl text-center mt-10">Результати</h1>
-  <div class="flex justify-center flex-col mx-20  min-w-max">
-    <ResultTable  :results="results" ></ResultTable>
-  </div>
-</template> -->
-
 <template>
   <TasksLayout>
     <template #tasks>
@@ -40,7 +17,6 @@
             'bg-gray-400':!state.isAllRightAnswer,
             'hover:bg-gray-400':!state.isAllRightAnswer,
             'active:bg-gray-400':!state.isAllRightAnswer,
-            // 'hidden':state.isAllRightAnswer===false,
           }"
 
           :disabled="!state.isAllRightAnswer"
@@ -71,8 +47,6 @@ import { DateTime } from "luxon";
 
 const props = defineProps(['operation', 'results'])
 
-// console.log(props.results);
-
 const state = reactive(
   {
     tasksArr: [],
@@ -100,8 +74,6 @@ function newTasks() {
   state.DateTimeEnd = DateTime.now();
 
   let diff = state.DateTimeEnd.diff(state.DateTimeStart);
-
-  // console.log(diff.toFormat("hh:mm:ss"));
 
   let data = {
     operation: "множення",

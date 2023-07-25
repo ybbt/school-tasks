@@ -1,13 +1,3 @@
-<!-- <template>
-  <h1 class="text-green-900 text-4xl text-center">Приклади</h1>
-  <div class="flex justify-center">
-    <div class="min-w-max pt-5">
-      <AddTask v-for="item in state.tasksArr" :task="item" class="text-2xl rounded-lg"></AddTask>
-      <PrimaryButton @click="newTasks" class="text-xl bg-blue-900">Нові приклади</PrimaryButton>
-    </div>
-  </div>
-</template> -->
-
 <template>
   <TasksLayout>
     <template #tasks>
@@ -38,7 +28,7 @@ import {arithmeticOperations} from '../enums';
 
 const state = reactive({tasksArr: []});
 
-// newTasks();
+newTasks();
 
 function newTasks() {
   state.tasksArr.length = 0;

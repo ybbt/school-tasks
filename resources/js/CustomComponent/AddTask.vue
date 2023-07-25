@@ -44,13 +44,11 @@ const result = computed(() => {
   }
 })
 
-// this.$emit('name', "Raja Tamil");
-
 watch(state, () => {
   if(result.value) {
-    emit('changeTrue'/* , "Raja Tamil" */);
+    emit('changeTrue');
   } else {
-    emit('changeFalse'/* , "Raja Tamil" */);
+    emit('changeFalse');
   }
 })
 

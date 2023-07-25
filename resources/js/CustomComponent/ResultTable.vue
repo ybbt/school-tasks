@@ -16,8 +16,8 @@
 
 <script setup>
 
-import ResultItem from "./ResultItem.vue";
+  import ResultItem from "./ResultItem.vue";
 
-const props = defineProps(['results']);
+  const props = defineProps(['results']);
 
 </script>

@@ -14,7 +14,6 @@ class ResultResource extends JsonResource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
         return [
             'user_id' => $this->user_id,
             'created_at' => $this->created_at,
