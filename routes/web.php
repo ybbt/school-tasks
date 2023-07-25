@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ResultsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,12 @@ Route::get('/yorikboss', function () {
 
 Route::get('/addition', function () {
     return Inertia::render('Addition');
+})->middleware(['auth', 'verified']);
+
+Route::group(['middleware' => 'auth'], function (){
+    Route::post('/save_statistics', [ResultsController::class, 'save']);
+    Route::get('/multiplication', [ResultsController::class, 'store']);
+    Route::get('/results', [ResultsController::class, 'storeAll']);
 });
 
 require __DIR__.'/auth.php';

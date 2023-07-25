@@ -4,7 +4,7 @@
       :class="{
         'bg-blue-300':state.res===null,
         'bg-orange-600':!result && state.res!==null,
-        'bg-emerald-400':result
+        'bg-emerald-400':result 
       }"
   >
     <span class="px-2">{{ task.a }}</span>
@@ -31,12 +31,24 @@ const props = defineProps({
 
 const state = reactive({res: null});
 
+const emit = defineEmits(['changeTrue', 'changeFalse']);
+
 const result = computed(() => {
   switch (props.task.operation) {
     case arithmeticOperations.PLUS:
       return +state.res === props.task.a + props.task.b;
     case arithmeticOperations.MINUS:
       return +state.res === props.task.a - props.task.b;
+    case "x": //додати до enum
+      return +state.res === props.task.a * props.task.b;
+  }
+})
+
+watch(state, () => {
+  if(result.value) {
+    emit('changeTrue');
+  } else {
+    emit('changeFalse');
   }
 })
 
