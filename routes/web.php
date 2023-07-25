@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ResultsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,22 @@ Route::get('/yorikboss', function () {
 
 Route::get('/addition', function () {
     return Inertia::render('Addition');
+})->middleware(['auth', 'verified']);
+
+Route::group(['middleware' => 'auth'], function (){
+    // Route::post('/upload', [TempFileController::class, 'upload']);
+    // Route::delete('/upload', [TempFileController::class, 'delete']);
+    // Route::post('/save', [FileController::class, 'store']);
+    // Route::post('/edit/{file}', [FileController::class, 'update'])->can('update', 'file');
+    // Route::delete('/delete/{file}', [FileController::class, 'destroy'])->can('delete', 'file');
+    // Route::get('/load/{serverId}', [FileController::class, 'load']);
+
+    // Route::get('/save', [ResultsController::class, 'store']);
+
+    
+    Route::post('/save_statistics', [ResultsController::class, 'save']);
+    Route::get('/multiplication', [ResultsController::class, 'store']);
+    Route::get('/results', [ResultsController::class, 'storeAll']);
 });
 
 require __DIR__.'/auth.php';
