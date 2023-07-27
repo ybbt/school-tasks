@@ -1,17 +1,25 @@
 <template>
   <TasksLayout>
     <template #tasks>
-      <AddTask 
-        @changeTrue="taskChangeTrue(index)" 
-        @changeFalse="taskChangeFalse(index)" 
-        v-for="(item, index) in state.tasksArr" 
-        :task="item" 
-        class="text-2xl rounded-lg"
-      >
-      </AddTask>
+      <div class="flex">
+        <AddTasksOptions
+          @changeOptionsList="setOptionsList"
+        />
+      </div>
+      <div class="flex flex-col items-center min-w-max">
+        <AddTask 
+          @changeTrue="taskChangeTrue(index)" 
+          @changeFalse="taskChangeFalse(index)" 
+          v-for="(item, index) in state.tasksArr" 
+          :task="item" 
+          class="text-2xl rounded-lg "
+        >
+        </AddTask>
+
+      </div>
       <PrimaryButton 
           @click="newTasks" 
-          class="text-xl"
+          class="text-xl mt-5"
           :class="{
             'bg-blue-900':state.isAllRightAnswer,
             'bg-gray-400':!state.isAllRightAnswer,
@@ -34,6 +42,7 @@
 
 <script setup>
 import TasksLayout from "../Layouts/TasksLayout.vue";
+import AddTasksOptions from "../CustomComponent/AddTasksOptions.vue";
 import AddTask from '../CustomComponent/AddTask.vue';
 import PrimaryButton from '../Components/PrimaryButton.vue';
 import ResultTable from "../CustomComponent/ResultTable.vue";
@@ -49,15 +58,26 @@ const props = defineProps(['operation', 'results'])
 
 const state = reactive(
   {
+    // optionsArr: [1,2,3,4,5,6,7,8,9,10],
+    // selectOptionsArr: [],
     tasksArr: [],
     DateTimeStart: DateTime.now(),
     DateTimeEnd: null,
+    optionsArr: null,
     answersMarksArr: [false,false,false,false,false,false,false,false,false,false],
     isAllRightAnswer: false,
     isNotFirstOpenPage: false,
   });
 
-newTasks();
+// newTasks();
+
+function setOptionsList(val){
+  // console.log(val);
+  // let index = Math.floor(Math.random() * ((val.optionsList.length) - 0) + 0)
+  // console.log(val.optionsList[index]);
+  state.optionsArr = val.optionsList;
+  updateTask();
+}
 
 function taskChangeTrue(value) {
       state.answersMarksArr[value]=true;
@@ -85,20 +105,30 @@ function newTasks() {
       /* router */Inertia.post('/save_statistics', data);
   }
 
-  state.tasksArr.length = 0;
-  for (let i = 0; i < 10; i++) {
-    state.tasksArr.push(multTask());
+  updateTask();
+}
 
-    state.DateTimeStart = DateTime.now();
+
+function updateTask(){
+  state.tasksArr.length = 0;
+  if (state.optionsArr.length > 0) {
+    for (let i = 0; i < 10; i++) {
+      state.tasksArr.push(multTask());
+  
+      state.DateTimeStart = DateTime.now();
+    }
+    
   }
 
   state.isNotFirstOpenPage = true;
-
 }
 
 
 function multTask() {
-  let a = Math.floor(Math.random() * (6 - 2 + 1)) + 2;
+  // let a = Math.floor(Math.random() * (6 - 2 + 1)) + 2;
+  // console.log(state.optionsArr);
+  let index = Math.floor(Math.random() * ((state.optionsArr.length) - 0) + 0);
+  let a = state.optionsArr[index];
   let b = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
   return {a, b, operation: "x"};
 }
