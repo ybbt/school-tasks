@@ -1,7 +1,9 @@
 <template>
   <TasksLayout>
     <template #tasks>
-      <AddTask v-for="item in state.tasksArr" :task="item" class="text-2xl rounded-lg"></AddTask>
+      <AddTask
+        :tasksArr="state.tasksArr"
+      />
       <PrimaryButton 
           @click="newTasks" 
           class="text-xl bg-blue-900"

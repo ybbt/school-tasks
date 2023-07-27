@@ -1,17 +1,21 @@
 <template>
   <TasksLayout>
     <template #tasks>
-      <AddTask 
-        @changeTrue="taskChangeTrue(index)" 
-        @changeFalse="taskChangeFalse(index)" 
-        v-for="(item, index) in state.tasksArr" 
-        :task="item" 
-        class="text-2xl rounded-lg"
-      >
-      </AddTask>
+      <div class="flex">
+        <AddTasksOptions
+          @changeOptionsList="setOptionsList"
+        />
+      </div>
+      <div class="flex flex-col items-center min-w-max">
+        <AddTask
+          @change-is-all-right-answer="setIsAllRightAnswer"
+          :tasksArr="state.tasksArr"
+        />
+
+      </div>
       <PrimaryButton 
           @click="newTasks" 
-          class="text-xl"
+          class="text-xl mt-5"
           :class="{
             'bg-blue-900':state.isAllRightAnswer,
             'bg-gray-400':!state.isAllRightAnswer,
@@ -34,10 +38,11 @@
 
 <script setup>
 import TasksLayout from "../Layouts/TasksLayout.vue";
+import AddTasksOptions from "../CustomComponent/AddTasksOptions.vue";
 import AddTask from '../CustomComponent/AddTask.vue';
 import PrimaryButton from '../Components/PrimaryButton.vue';
 import ResultTable from "../CustomComponent/ResultTable.vue";
-import {reactive, watch} from "vue";
+import {reactive} from "vue";
 /** 
  * ? Не розумію, чому не працює router, замість нього Inertia 
  import { router } from '@inertiajs/vue3';
@@ -45,38 +50,39 @@ import {reactive, watch} from "vue";
 import {Inertia} from "@inertiajs/inertia";
 import { DateTime } from "luxon";
 
-const props = defineProps(['operation', 'results'])
+const props = defineProps(['operation', 'results']);
 
 const state = reactive(
   {
     tasksArr: [],
     DateTimeStart: DateTime.now(),
     DateTimeEnd: null,
-    answersMarksArr: [false,false,false,false,false,false,false,false,false,false],
+    optionsArr: null,
     isAllRightAnswer: false,
     isNotFirstOpenPage: false,
   });
 
-newTasks();
+// newTasks();
 
-function taskChangeTrue(value) {
-      state.answersMarksArr[value]=true;
+function setOptionsList(val){
+  state.optionsArr = val.optionsList;
+  updateTask();
 }
-
-function taskChangeFalse(value) {
-    state.answersMarksArr[value]=false;
-}
-
 
 function newTasks() {
-  state.answersMarksArr.map(()=>false);
 
   state.DateTimeEnd = DateTime.now();
 
   let diff = state.DateTimeEnd.diff(state.DateTimeStart);
 
+  let operations = state.optionsArr.reduce(function(accum, item){
+    return `${accum}, ${item}`
+  });
+
+  let operation = `множення (${operations})`;
+
   let data = {
-    operation: "множення",
+    operation: operation,
     resolution_time: diff.toFormat("hh:mm:ss"),
   }
 
@@ -85,27 +91,34 @@ function newTasks() {
       /* router */Inertia.post('/save_statistics', data);
   }
 
-  state.tasksArr.length = 0;
-  for (let i = 0; i < 10; i++) {
-    state.tasksArr.push(multTask());
+  updateTask();
+}
 
-    state.DateTimeStart = DateTime.now();
+
+function updateTask(){
+  state.tasksArr.length = 0;
+  if (state.optionsArr.length > 0) {
+    for (let i = 0; i < 10; i++) {
+      state.tasksArr.push(multTask());
+  
+      state.DateTimeStart = DateTime.now();
+    }
+    
   }
 
   state.isNotFirstOpenPage = true;
-
 }
 
 
 function multTask() {
-  let a = Math.floor(Math.random() * (6 - 2 + 1)) + 2;
+  let index = Math.floor(Math.random() * ((state.optionsArr.length) - 0) + 0);
+  let a = state.optionsArr[index];
   let b = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
   return {a, b, operation: "x"};
 }
 
-watch(state, async () => {
-  state.isAllRightAnswer = state.answersMarksArr.reduce(function(a,b){return(a && b)});
-  
-})
+function setIsAllRightAnswer(val){
+  state.isAllRightAnswer = val.isAllRightAnswer;
+}
 
 </script>

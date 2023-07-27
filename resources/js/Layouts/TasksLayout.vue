@@ -1,7 +1,7 @@
 <template>
   <h1 class="text-green-900 text-4xl text-center">Приклади</h1>
   <div class="flex justify-center ">
-    <div class="min-w-max pt-5">
+    <div class="py-5">
       <slot name="tasks"></slot>
     </div>
   </div>
