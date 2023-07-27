@@ -1,12 +1,12 @@
 <template>
-    <div class="flex">
+    <!-- <div class="flex"> -->
         <tasksOptionsItem
             v-for="(item, index) in state.optionsArr" 
             :value="item"
             :index="index"
             @change-option="setOptions"
         />
-      </div>
+      <!-- </div> -->
 
 </template>
 

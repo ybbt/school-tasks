@@ -7,14 +7,10 @@
         />
       </div>
       <div class="flex flex-col items-center min-w-max">
-        <AddTask 
-          @changeTrue="taskChangeTrue(index)" 
-          @changeFalse="taskChangeFalse(index)" 
-          v-for="(item, index) in state.tasksArr" 
-          :task="item" 
-          class="text-2xl rounded-lg "
-        >
-        </AddTask>
+        <AddTask
+          @change-is-all-right-answer="setIsAllRightAnswer"
+          :tasksArr="state.tasksArr"
+        />
 
       </div>
       <PrimaryButton 
@@ -46,7 +42,7 @@ import AddTasksOptions from "../CustomComponent/AddTasksOptions.vue";
 import AddTask from '../CustomComponent/AddTask.vue';
 import PrimaryButton from '../Components/PrimaryButton.vue';
 import ResultTable from "../CustomComponent/ResultTable.vue";
-import {reactive, watch} from "vue";
+import {reactive, /* watch */} from "vue";
 /** 
  * ? Не розумію, чому не працює router, замість нього Inertia 
  import { router } from '@inertiajs/vue3';
@@ -54,7 +50,7 @@ import {reactive, watch} from "vue";
 import {Inertia} from "@inertiajs/inertia";
 import { DateTime } from "luxon";
 
-const props = defineProps(['operation', 'results'])
+const props = defineProps(['operation', 'results']);
 
 const state = reactive(
   {
@@ -64,7 +60,7 @@ const state = reactive(
     DateTimeStart: DateTime.now(),
     DateTimeEnd: null,
     optionsArr: null,
-    answersMarksArr: [false,false,false,false,false,false,false,false,false,false],
+    // answersMarksArr: [false,false,false,false,false,false,false,false,false,false],
     isAllRightAnswer: false,
     isNotFirstOpenPage: false,
   });
@@ -79,17 +75,17 @@ function setOptionsList(val){
   updateTask();
 }
 
-function taskChangeTrue(value) {
-      state.answersMarksArr[value]=true;
-}
+// function taskChangeTrue(value) {
+//       state.answersMarksArr[value]=true;
+// }
 
-function taskChangeFalse(value) {
-    state.answersMarksArr[value]=false;
-}
+// function taskChangeFalse(value) {
+//     state.answersMarksArr[value]=false;
+// }
 
 
 function newTasks() {
-  state.answersMarksArr.map(()=>false);
+  // state.answersMarksArr.map(()=>false);
 
   state.DateTimeEnd = DateTime.now();
 
@@ -133,9 +129,13 @@ function multTask() {
   return {a, b, operation: "x"};
 }
 
-watch(state, async () => {
-  state.isAllRightAnswer = state.answersMarksArr.reduce(function(a,b){return(a && b)});
+// watch(state, async () => {
+//   state.isAllRightAnswer = state.answersMarksArr.reduce(function(a,b){return(a && b)});
   
-})
+// })
+
+function setIsAllRightAnswer(val){
+  state.isAllRightAnswer = val.isAllRightAnswer;
+}
 
 </script>
