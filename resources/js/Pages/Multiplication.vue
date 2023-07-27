@@ -54,13 +54,10 @@ const props = defineProps(['operation', 'results']);
 
 const state = reactive(
   {
-    // optionsArr: [1,2,3,4,5,6,7,8,9,10],
-    // selectOptionsArr: [],
     tasksArr: [],
     DateTimeStart: DateTime.now(),
     DateTimeEnd: null,
     optionsArr: null,
-    // answersMarksArr: [false,false,false,false,false,false,false,false,false,false],
     isAllRightAnswer: false,
     isNotFirstOpenPage: false,
   });
@@ -68,24 +65,11 @@ const state = reactive(
 // newTasks();
 
 function setOptionsList(val){
-  // console.log(val);
-  // let index = Math.floor(Math.random() * ((val.optionsList.length) - 0) + 0)
-  // console.log(val.optionsList[index]);
   state.optionsArr = val.optionsList;
   updateTask();
 }
 
-// function taskChangeTrue(value) {
-//       state.answersMarksArr[value]=true;
-// }
-
-// function taskChangeFalse(value) {
-//     state.answersMarksArr[value]=false;
-// }
-
-
 function newTasks() {
-  // state.answersMarksArr.map(()=>false);
 
   state.DateTimeEnd = DateTime.now();
 
@@ -121,18 +105,11 @@ function updateTask(){
 
 
 function multTask() {
-  // let a = Math.floor(Math.random() * (6 - 2 + 1)) + 2;
-  // console.log(state.optionsArr);
   let index = Math.floor(Math.random() * ((state.optionsArr.length) - 0) + 0);
   let a = state.optionsArr[index];
   let b = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
   return {a, b, operation: "x"};
 }
-
-// watch(state, async () => {
-//   state.isAllRightAnswer = state.answersMarksArr.reduce(function(a,b){return(a && b)});
-  
-// })
 
 function setIsAllRightAnswer(val){
   state.isAllRightAnswer = val.isAllRightAnswer;

@@ -13,7 +13,6 @@
     const emit = defineEmits(['changeOption']);
 
     function updateCheckbox(val) {
-        // console.log(val, props.index);
         emit('changeOption', {
             value: val,
             index: props.index,

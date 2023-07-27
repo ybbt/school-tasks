@@ -1,13 +1,10 @@
 <template>
-    <!-- <div class="flex"> -->
         <tasksOptionsItem
             v-for="(item, index) in state.optionsArr" 
             :value="item"
             :index="index"
             @change-option="setOptions"
         />
-      <!-- </div> -->
-
 </template>
 
   <script setup>
@@ -36,7 +33,6 @@
     
     function setOptions(value) {
         state.selectOptionsArr[value.index].isSelect = value.value;
-        // console.log(state.selectOptionsArr);
     }
 
     watch(state.selectOptionsArr, () => {
