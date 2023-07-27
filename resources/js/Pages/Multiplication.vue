@@ -42,7 +42,7 @@ import AddTasksOptions from "../CustomComponent/AddTasksOptions.vue";
 import AddTask from '../CustomComponent/AddTask.vue';
 import PrimaryButton from '../Components/PrimaryButton.vue';
 import ResultTable from "../CustomComponent/ResultTable.vue";
-import {reactive, /* watch */} from "vue";
+import {reactive} from "vue";
 /** 
  * ? Не розумію, чому не працює router, замість нього Inertia 
  import { router } from '@inertiajs/vue3';
@@ -75,8 +75,14 @@ function newTasks() {
 
   let diff = state.DateTimeEnd.diff(state.DateTimeStart);
 
+  let operations = state.optionsArr.reduce(function(accum, item){
+    return `${accum}, ${item}`
+  });
+
+  let operation = `множення (${operations})`;
+
   let data = {
-    operation: "множення",
+    operation: operation,
     resolution_time: diff.toFormat("hh:mm:ss"),
   }
 
