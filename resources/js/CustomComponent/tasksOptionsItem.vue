@@ -1,5 +1,5 @@
 <template>
-    <div class="border border-slate-200 p-2 min-w-max">
+    <div class="border border-slate-200 p-2">
         <span class="m-1">{{ value }}</span>
         <span class="m-1"><Checkbox @update:checked="updateCheckbox"/></span>
     </div>

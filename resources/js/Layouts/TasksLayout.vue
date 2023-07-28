@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div class="flex justify-center flex-col mx-20  min-w-max">
+  <div class="mx-2 sm:mx-20 ">
     <Link href="/results" class="text-4xl text-center mt-10">Результати</Link>
     <slot name="results"></slot>
   </div>

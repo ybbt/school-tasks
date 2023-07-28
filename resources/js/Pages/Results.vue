@@ -1,6 +1,6 @@
 <template #results>
     <h1 class="text-4xl text-center mt-10">Результати</h1>
-    <div class="flex justify-center flex-col mx-20  min-w-max">
+    <div class="sm:mx-20 mx-2">
         <ResultTable  :results="results" ></ResultTable>
 
     </div>

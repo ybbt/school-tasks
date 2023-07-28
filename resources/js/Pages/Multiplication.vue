@@ -1,7 +1,7 @@
 <template>
   <TasksLayout>
     <template #tasks>
-      <div class="flex">
+      <div class="flex flex-wrap justify-center mx-2">
         <AddTasksOptions
           @changeOptionsList="setOptionsList"
         />
@@ -13,20 +13,23 @@
         />
 
       </div>
-      <PrimaryButton 
-          @click="newTasks" 
-          class="text-xl mt-5"
-          :class="{
-            'bg-blue-900':state.isAllRightAnswer,
-            'bg-gray-400':!state.isAllRightAnswer,
-            'hover:bg-gray-400':!state.isAllRightAnswer,
-            'active:bg-gray-400':!state.isAllRightAnswer,
-          }"
+      <div class="flex justify-center">
+        <PrimaryButton 
+            @click="newTasks" 
+            class="text-xl mt-5"
+            :class="{
+              'bg-blue-900':state.isAllRightAnswer,
+              'bg-gray-400':!state.isAllRightAnswer,
+              'hover:bg-gray-400':!state.isAllRightAnswer,
+              'active:bg-gray-400':!state.isAllRightAnswer,
+            }"
+  
+            :disabled="!state.isAllRightAnswer"
+        >
+            Нові приклади
+        </PrimaryButton>
 
-          :disabled="!state.isAllRightAnswer"
-      >
-          Нові приклади
-      </PrimaryButton>
+      </div>
     </template>
 
     <template #results>
