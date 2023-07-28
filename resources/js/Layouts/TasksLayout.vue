@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div class="mx-2 sm:mx-20 ">
+  <div class="mx-2 sm:mx-20 mb-2">
     <Link href="/results" class="text-4xl text-center mt-10">Результати</Link>
     <slot name="results"></slot>
   </div>
