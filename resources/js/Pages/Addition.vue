@@ -4,15 +4,18 @@
       <AddTask
         :tasksArr="state.tasksArr"
       />
-      <PrimaryButton 
-          @click="newTasks" 
-          class="text-xl bg-blue-900"
-          :class="{
-            'hidden':state.isAllRightAnswer===false,
-          }"
-        >
-          Нові приклади
-      </PrimaryButton>
+      <div class="flex justify-center">
+        <PrimaryButton 
+            @click="newTasks" 
+            class="text-xl bg-blue-900"
+            :class="{
+              'hidden':state.isAllRightAnswer===false,
+            }"
+          >
+            Нові приклади
+        </PrimaryButton>
+
+      </div>
     </template>
    
     <template #results>

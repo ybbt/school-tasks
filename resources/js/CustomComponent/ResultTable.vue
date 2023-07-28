@@ -1,5 +1,5 @@
 <template>
-    <table class="border-separate border border-slate-400 min-w-max">
+    <table class="border-separate border border-slate-400 w-full table-auto">
       <thead>
         <tr>
           <th class="border border-slate-300 bg-gray-200">Завершено</th>
