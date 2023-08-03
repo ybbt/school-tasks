@@ -40,6 +40,8 @@ Route::get('/addition', function () {
 Route::group(['middleware' => 'auth'], function (){
     Route::post('/save_statistics', [ResultsController::class, 'save']);
     Route::get('/multiplication', [ResultsController::class, 'store']);
+    Route::get('/division', [ResultsController::class, 'division']);
+    Route::post('/save_division', [ResultsController::class, 'save_division']);
     Route::get('/results', [ResultsController::class, 'storeAll']);
 });
 

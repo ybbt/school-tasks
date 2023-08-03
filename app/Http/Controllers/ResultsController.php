@@ -28,4 +28,16 @@ class ResultsController extends Controller
 
         return Inertia::render('Results', ['results' => $userResults]);
     }
+
+    public function division(){
+        $userResults = ResultResource::collection(auth()->user()->result()->orderBy('created_at', 'DESC')->whereRaw('created_at >= curdate()')/* ->where('created_at', '>', now()->subHours(24)) *//* ->take(10) */->get());
+
+        return Inertia::render('Division', ['results' => $userResults, 'operation' => 'division']);
+    }
+
+    public function save_division(SaveResultRequest $request){
+        $createdResult = auth()->user()->result()->create($request->validated());
+
+        return redirect('/division');
+    }
 }

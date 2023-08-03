@@ -41,6 +41,8 @@
         return +state.res === props.task.a - props.task.b;
       case "x": //додати до enum
         return +state.res === props.task.a * props.task.b;
+      case ":": //додати до enum
+        return +state.res === props.task.a / props.task.b;
     }
   })
   
