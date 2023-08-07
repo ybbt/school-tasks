@@ -35,12 +35,14 @@
   
   const result = computed(() => {
     switch (props.task.operation) {
-      case arithmeticOperations.PLUS:
+      case arithmeticOperations.PLUS.sign:
         return +state.res === props.task.a + props.task.b;
-      case arithmeticOperations.MINUS:
+      case arithmeticOperations.MINUS.sign:
         return +state.res === props.task.a - props.task.b;
-      case "x": //додати до enum
+      case arithmeticOperations.MULTIPLY.sign: 
         return +state.res === props.task.a * props.task.b;
+      case arithmeticOperations.COLON.sign: 
+        return +state.res === props.task.a / props.task.b;
     }
   })
   

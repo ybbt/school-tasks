@@ -31,6 +31,9 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
                     <div class="p-6 bg-white border-b border-gray-200">
                         <Link href="/multiplication" class="text-sm text-gray-700 dark:text-gray-500 underline">Множення</Link>
                     </div>
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <Link href="/division" class="text-sm text-gray-700 dark:text-gray-500 underline">Ділення</Link>
+                    </div>
                 </div>
             </div>
         </div>
