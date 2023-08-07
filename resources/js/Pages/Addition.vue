@@ -38,13 +38,14 @@ newTasks();
 function newTasks() {
   state.tasksArr.length = 0;
   for (let i = 0; i < 10; i++) {
-    let operation = getRandomEnumValue(arithmeticOperations);
+    let operationsVariant = [arithmeticOperations.PLUS.sign, arithmeticOperations.MINUS.sign];
+    let operation = getRandomEnumValue(operationsVariant/* arithmeticOperations */);
 
     switch (operation) {
-      case arithmeticOperations.PLUS:
+      case arithmeticOperations.PLUS.sign:
         state.tasksArr.push(addTask());
         break;
-      case arithmeticOperations.MINUS:
+      case arithmeticOperations.MINUS.sign:
         state.tasksArr.push(subTask());
         break;
     }
@@ -54,27 +55,35 @@ function newTasks() {
 function addTask() {
   let a = Math.floor(Math.random() * (90 - 10 + 1)) + 10;
   let b = Math.floor(Math.random() * (100 - a - 10 + 1)) + 10;
-  return {a, b, operation: arithmeticOperations.PLUS};
+  return {a, b, operation: arithmeticOperations.PLUS.sign};
 }
 
 function subTask() {
   let a = Math.floor(Math.random() * (99 - 10 + 1)) + 10;
   let b = Math.floor(Math.random() * (a - 10 + 1)) + 10;
-  return {a, b, operation: arithmeticOperations.MINUS};
+  return {a, b, operation: arithmeticOperations.MINUS.sign};
 }
 
-function getRandomEnumValue(anEnum) {
-  //save enums inside array
-  const enumValues = Object.keys(anEnum);
+// function getRandomEnumValue(anEnum) {
+//   //save enums inside array
+//   const enumValues = Object.keys(anEnum);
 
-  //Generate a random index (max is array length)
-  const randomIndex = Math.floor(Math.random() * enumValues.length);
-  // get the random enum value
+//   //Generate a random index (max is array length)
+//   const randomIndex = Math.floor(Math.random() * enumValues.length);
+//   // get the random enum value
 
-  const randomEnumKey = enumValues[randomIndex];
-  return anEnum[randomEnumKey];
-  // if you want to have the key than return randomEnumKey
-  // return randomEnumKey;
+//   const randomEnumKey = enumValues[randomIndex];
+//   return anEnum[randomEnumKey];
+//   // if you want to have the key than return randomEnumKey
+//   // return randomEnumKey;
+// }
+
+function getRandomEnumValue(anArr) {
+  
+  const randomIndex = Math.floor(Math.random() * anArr.length); console.log(randomIndex);
+
+  return anArr[randomIndex];
+
 }
 
 </script>

@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ResultsController;
+use App\Http\Controllers\MathTasksController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +40,13 @@ Route::get('/addition', function () {
 })->middleware(['auth', 'verified']);
 
 Route::group(['middleware' => 'auth'], function (){
-    Route::post('/save_statistics', [ResultsController::class, 'save']);
-    Route::get('/multiplication', [ResultsController::class, 'store']);
-    Route::get('/division', [ResultsController::class, 'division']);
-    Route::post('/save_division', [ResultsController::class, 'save_division']);
-    Route::get('/results', [ResultsController::class, 'storeAll']);
+    Route::get('/multiplication', [MathTasksController::class, 'simple_task'/* 'multiplication' */]);
+    Route::get('/division', [MathTasksController::class, 'simple_task'/* 'division' */]);
+    
+    // Route::post('/save_multiplication_statistics', [ResultsController::class, 'save_multiplication']);
+    // Route::post('/save_division_statistics', [ResultsController::class, 'save_division']);
+    Route::post('/save_statistics', [ResultsController::class, 'save_result']);
+    Route::get('/results', [ResultsController::class, 'index']);
 });
 
 require __DIR__.'/auth.php';

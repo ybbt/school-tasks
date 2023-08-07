@@ -5,39 +5,38 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaveResultRequest;
 use App\Http\Resources\ResultResource;
-use App\Models\Result;
+// use App\Models\Result;
 use Inertia\Inertia;
 
 class ResultsController extends Controller
 {
+    // DONE з'єднати збереження в БД в одну функцію, рендерити по додатковому параметру
 
-    public function save(SaveResultRequest $request){
-        $createdResult = auth()->user()->result()->create($request->validated());
+    // public function save_multiplication(SaveResultRequest $request){
+    //     $createdResult = auth()->user()->result()->create($request->validated());
+        
+    //     return redirect('/multiplication');
+    // }
 
-        return redirect('/multiplication');
-    }
-
-    public function store(){
-        $userResults = ResultResource::collection(auth()->user()->result()->orderBy('created_at', 'DESC')->whereRaw('created_at >= curdate()')/* ->where('created_at', '>', now()->subHours(24)) *//* ->take(10) */->get());
-
-        return Inertia::render('Multiplication', ['results' => $userResults, 'operation' => 'multiplication']);
-    }
-
-    public function storeAll(){
+    public function index(){
         $userResults = ResultResource::collection(auth()->user()->result()->orderBy('created_at', 'DESC')->get());
 
         return Inertia::render('Results', ['results' => $userResults]);
     }
 
-    public function division(){
-        $userResults = ResultResource::collection(auth()->user()->result()->orderBy('created_at', 'DESC')->whereRaw('created_at >= curdate()')/* ->where('created_at', '>', now()->subHours(24)) *//* ->take(10) */->get());
+    // public function save_division(SaveResultRequest $request){
+    //     $createdResult = auth()->user()->result()->create($request->validated());
 
-        return Inertia::render('Division', ['results' => $userResults, 'operation' => 'division']);
-    }
+    //     return redirect('/division');
+    // }
 
-    public function save_division(SaveResultRequest $request){
+    public function save_result(SaveResultRequest $request){
         $createdResult = auth()->user()->result()->create($request->validated());
-
-        return redirect('/division');
+        
+        if ($request->input('operation_id') === 'multiplication') {
+            return redirect('/multiplication');
+        } else if ($request->input('operation_id') === 'division') {
+            return redirect('/division');
+        }
     }
 }

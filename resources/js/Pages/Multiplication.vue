@@ -65,8 +65,6 @@ const state = reactive(
     isNotFirstOpenPage: false,
   });
 
-// newTasks();
-
 function setOptionsList(val){
   state.optionsArr = val.optionsList;
   updateTask();
@@ -87,11 +85,12 @@ function newTasks() {
   let data = {
     operation: operation,
     resolution_time: diff.toFormat("hh:mm:ss"),
+    operation_id: 'multiplication',
   }
 
 
   if (state.isNotFirstOpenPage) {
-      /* router */Inertia.post('/save_statistics', data);
+      /* router */Inertia.post(/* '/save_multiplication_statistics' */'save_statistics', data);
   }
 
   updateTask();
