@@ -39,9 +39,9 @@
         return +state.res === props.task.a + props.task.b;
       case arithmeticOperations.MINUS.sign:
         return +state.res === props.task.a - props.task.b;
-      case arithmeticOperations.MULTIPLY.sign: //додати до enum
+      case arithmeticOperations.MULTIPLY.sign: 
         return +state.res === props.task.a * props.task.b;
-      case arithmeticOperations.COLON.sign: //додати до enum
+      case arithmeticOperations.COLON.sign: 
         return +state.res === props.task.a / props.task.b;
     }
   })

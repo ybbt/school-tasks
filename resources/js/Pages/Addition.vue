@@ -39,7 +39,7 @@ function newTasks() {
   state.tasksArr.length = 0;
   for (let i = 0; i < 10; i++) {
     let operationsVariant = [arithmeticOperations.PLUS.sign, arithmeticOperations.MINUS.sign];
-    let operation = getRandomEnumValue(operationsVariant/* arithmeticOperations */);
+    let operation = getRandomEnumValue(operationsVariant);
 
     switch (operation) {
       case arithmeticOperations.PLUS.sign:
@@ -64,23 +64,9 @@ function subTask() {
   return {a, b, operation: arithmeticOperations.MINUS.sign};
 }
 
-// function getRandomEnumValue(anEnum) {
-//   //save enums inside array
-//   const enumValues = Object.keys(anEnum);
-
-//   //Generate a random index (max is array length)
-//   const randomIndex = Math.floor(Math.random() * enumValues.length);
-//   // get the random enum value
-
-//   const randomEnumKey = enumValues[randomIndex];
-//   return anEnum[randomEnumKey];
-//   // if you want to have the key than return randomEnumKey
-//   // return randomEnumKey;
-// }
-
 function getRandomEnumValue(anArr) {
   
-  const randomIndex = Math.floor(Math.random() * anArr.length); console.log(randomIndex);
+  const randomIndex = Math.floor(Math.random() * anArr.length);
 
   return anArr[randomIndex];
 

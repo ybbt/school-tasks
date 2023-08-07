@@ -87,17 +87,17 @@
         operation_id: null,
     };
 
-    if (props.operation  === arithmeticOperations.MULTIPLY.operationMark/* 'multiplication' */) {
-        let operation = `${arithmeticOperations.MULTIPLY.operationName} (${operations})`;//`множення (${operations})`;
+    if (props.operation  === arithmeticOperations.MULTIPLY.operationMark) {
+        let operation = `${arithmeticOperations.MULTIPLY.operationName} (${operations})`;
 
         data.operation = operation;
-        data.operation_id = arithmeticOperations.MULTIPLY.operationMark/* 'multiplication' */;
+        data.operation_id = arithmeticOperations.MULTIPLY.operationMark;
                        
-    } else if (props.operation  === arithmeticOperations.COLON.operationMark/* 'division' */) {
-        let operation = `${arithmeticOperations.COLON.operationName} (${operations})`;//`ділення (${operations})`;
+    } else if (props.operation  === arithmeticOperations.COLON.operationMark) {
+        let operation = `${arithmeticOperations.COLON.operationName} (${operations})`;
 
         data.operation = operation;
-        data.operation_id = arithmeticOperations.COLON.operationMark/* 'division' */;
+        data.operation_id = arithmeticOperations.COLON.operationMark;
     }
   
   
@@ -108,16 +108,15 @@
   
     updateTask();
   }
-  
-  // TODO Зробити Enum для назви дій. Можливо у вже існуючий Enum
+
   function updateTask(){
     state.tasksArr.length = 0;
     if (state.optionsArr.length > 0) {
       for (let i = 0; i < 10; i++) {
 
-        if (props.operation  === arithmeticOperations.MULTIPLY.operationMark/* 'multiplication' */) {
+        if (props.operation  === arithmeticOperations.MULTIPLY.operationMark) {
             state.tasksArr.push(multTask());            
-        } else if (props.operation  === arithmeticOperations.COLON.operationMark/* 'division' */) {
+        } else if (props.operation  === arithmeticOperations.COLON.operationMark) {
             state.tasksArr.push(divTask());
         }
     
